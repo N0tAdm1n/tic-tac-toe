@@ -1,15 +1,15 @@
 // need a gameboard module
 // - need an actual board can be done with an array
 // - send board state to render
-let gameBoard = (() => {
+const gameBoard = (() => {
   let _board = ["", "", "", "", "", "", "", "", ""]; //board
   // show current board state
-  let showBoardState = () => {
+  const showBoardState = () => {
     let currentBoardState = _board;
     return currentBoardState;
   };
   // - update the board
-  let updateBoardState = (index, sign) => {
+  const updateBoardState = (index, sign) => {
     _board[index] = `${sign}`;
   };
   return { showBoardState, updateBoardState };
