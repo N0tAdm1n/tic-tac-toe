@@ -1,6 +1,19 @@
 // need a gameboard module
 // - need an actual board can be done with an array
 // - send board state to render
+let gameBoard = (() => {
+  let _board = ["", "", "", "", "", "", "", "", ""]; //board
+  // show current board state
+  let showBoardState = () => {
+    let currentBoardState = _board;
+    return currentBoardState;
+  };
+  // - update the board
+  let updateBoardState = (index, sign) => {
+    _board[index] = `${sign}`;
+  };
+  return { showBoardState, updateBoardState };
+})();
 
 // 2 player factories
 // - have a name
