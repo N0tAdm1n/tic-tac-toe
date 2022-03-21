@@ -18,6 +18,19 @@ const gameBoard = (() => {
 // 2 player factories
 // - have a name
 // - will be assigned either x or o
+const Player = () => {
+  let _playerName = "N0tAdm1n";
+  let _playerSign = "x";
+  const changePlayerName = (name) => {
+    _playerName = name;
+  };
+  const changePlayerSign = (sign) => {
+    _playerSign = sign;
+  };
+  const getName = () => _playerName;
+  const getSign = () => _playerSign;
+  return { getName, getSign, changePlayerName, changePlayerSign };
+};
 
 // a module to render the game
 // - need to show the state of board
