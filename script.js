@@ -38,3 +38,26 @@ const Player = () => {
 // gamemaster - will act as gamemaster
 // - let player go turn by turn
 // - tell who won the game or if it is a draw
+const gameMaster = (() => {
+  const _player1 = Player();
+  const _player2 = Player();
+  _player1.changePlayerName("Unga");
+  _player1.changePlayerSign("o");
+})();
+
+// control everything on display
+const displayController = (() => {
+  const boardTiles = Array.from(document.querySelectorAll(".tile"));
+  //eventListener for each tiles
+  const tilesEventListener = () => {
+    for (let tile of boardTiles) {
+      tile.addEventListener("click", () => {
+        console.log("hi");
+      });
+    }
+  };
+
+  return { tilesEventListener };
+})();
+
+displayController.tilesEventListener();
