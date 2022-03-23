@@ -32,9 +32,6 @@ const Player = () => {
   return { getName, getSign, changePlayerName, changePlayerSign };
 };
 
-// a module to render the game
-// - need to show the state of board
-
 // gamemaster - will act as gamemaster
 // - let player go turn by turn
 // - tell who won the game or if it is a draw
@@ -50,9 +47,14 @@ const displayController = (() => {
   const boardTiles = Array.from(document.querySelectorAll(".tile"));
   //eventListener for each tiles
   const tilesEventListener = () => {
-    for (let tile of boardTiles) {
-      tile.addEventListener("click", () => {
-        console.log("hi");
+    // for (let tile of boardTiles) {
+    //   tile.addEventListener("click", () => {
+    //     console.log("hi");
+    //   });
+    // }
+    for (let i = 0; i < 9; i++) {
+      boardTiles[i].addEventListener("click", () => {
+        console.log(i + 1);
       });
     }
   };
