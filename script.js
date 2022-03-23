@@ -39,7 +39,8 @@ const gameMaster = (() => {
   const _player1 = Player();
   const _player2 = Player();
   _player1.changePlayerName("Unga");
-  _player1.changePlayerSign("o");
+  _player1.changePlayerSign("x");
+  _player2.changePlayerSign("o");
   let _currentPlayer = _player1.getSign();
   const getCurrentPlayer = () => {
     return _currentPlayer;
@@ -48,7 +49,39 @@ const gameMaster = (() => {
     if (_currentPlayer == "x") _currentPlayer = "o";
     else _currentPlayer = "x";
   };
-  return { getCurrentPlayer, changeCurrentPlayer };
+  const checkWinner = () => {
+    let boardState = gameBoard.showBoardState();
+    let currentPlayer = gameMaster.getCurrentPlayer();
+    if (
+      (boardState[0] == currentPlayer &&
+        boardState[1] == currentPlayer &&
+        boardState[2] == currentPlayer) ||
+      (boardState[3] == currentPlayer &&
+        boardState[4] == currentPlayer &&
+        boardState[5] == currentPlayer) ||
+      (boardState[6] == currentPlayer &&
+        boardState[7] == currentPlayer &&
+        boardState[8] == currentPlayer) ||
+      (boardState[0] == currentPlayer &&
+        boardState[3] == currentPlayer &&
+        boardState[6] == currentPlayer) ||
+      (boardState[1] == currentPlayer &&
+        boardState[4] == currentPlayer &&
+        boardState[7] == currentPlayer) ||
+      (boardState[2] == currentPlayer &&
+        boardState[5] == currentPlayer &&
+        boardState[8] == currentPlayer) ||
+      (boardState[0] == currentPlayer &&
+        boardState[4] == currentPlayer &&
+        boardState[8] == currentPlayer) ||
+      (boardState[2] == currentPlayer &&
+        boardState[4] == currentPlayer &&
+        boardState[6] == currentPlayer)
+    ) {
+      console.log(`${getCurrentPlayer()} wins`);
+    }
+  };
+  return { getCurrentPlayer, changeCurrentPlayer, checkWinner };
 })();
 
 // control everything on display
@@ -62,6 +95,7 @@ const displayController = (() => {
         () => {
           gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
           boardTiles[i].textContent = `${gameMaster.getCurrentPlayer()}`;
+          gameMaster.checkWinner();
           gameMaster.changeCurrentPlayer();
         },
         { once: true }
