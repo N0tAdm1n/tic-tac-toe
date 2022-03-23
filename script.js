@@ -40,6 +40,15 @@ const gameMaster = (() => {
   const _player2 = Player();
   _player1.changePlayerName("Unga");
   _player1.changePlayerSign("o");
+  let _currentPlayer = _player1.getSign();
+  const getCurrentPlayer = () => {
+    return _currentPlayer;
+  };
+  const changeCurrentPlayer = () => {
+    if (_currentPlayer == "x") _currentPlayer = "o";
+    else _currentPlayer = "x";
+  };
+  return { getCurrentPlayer, changeCurrentPlayer };
 })();
 
 // control everything on display
@@ -47,15 +56,15 @@ const displayController = (() => {
   const boardTiles = Array.from(document.querySelectorAll(".tile"));
   //eventListener for each tiles
   const tilesEventListener = () => {
-    // for (let tile of boardTiles) {
-    //   tile.addEventListener("click", () => {
-    //     console.log("hi");
-    //   });
-    // }
     for (let i = 0; i < 9; i++) {
-      boardTiles[i].addEventListener("click", () => {
-        console.log(i + 1);
-      });
+      boardTiles[i].addEventListener(
+        "click",
+        () => {
+          gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
+          gameMaster.changeCurrentPlayer();
+        },
+        { once: true }
+      );
     }
   };
 
