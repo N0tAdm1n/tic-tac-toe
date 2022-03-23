@@ -61,6 +61,7 @@ const displayController = (() => {
         "click",
         () => {
           gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
+          boardTiles[i].textContent = `${gameMaster.getCurrentPlayer()}`;
           gameMaster.changeCurrentPlayer();
         },
         { once: true }
