@@ -83,6 +83,7 @@ const gameMaster = (() => {
         ".winner-announcement-container"
       );
       winnerAnnouncement.textContent = `${getCurrentPlayer()} wins`;
+      displayController.removeTilesEventListener();
     }
   };
   return { getCurrentPlayer, changeCurrentPlayer, checkWinner };
@@ -91,6 +92,7 @@ const gameMaster = (() => {
 // control everything on display
 const displayController = (() => {
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
+
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
       _boardTiles.indexOf(e.target),
@@ -106,8 +108,13 @@ const displayController = (() => {
       tile.addEventListener("click", _clickTile, { once: true });
     });
   };
-
-  return { tilesEventListener };
+  // remove eventListener from each tiles
+  const removeTilesEventListener = () => {
+    _boardTiles.forEach((tile) =>
+      tile.removeEventListener("click", _clickTile)
+    );
+  };
+  return { tilesEventListener, removeTilesEventListener };
 })();
 
 displayController.tilesEventListener();
