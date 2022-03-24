@@ -95,18 +95,15 @@ const gameMaster = (() => {
 const displayController = (() => {
   const boardTiles = Array.from(document.querySelectorAll(".tile"));
   //eventListener for each tiles
+  const clickTile = () => {
+    gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
+    boardTiles[i].textContent = `${gameMaster.getCurrentPlayer()}`;
+    gameMaster.checkWinner();
+    gameMaster.changeCurrentPlayer();
+  };
   const tilesEventListener = () => {
     for (let i = 0; i < 9; i++) {
-      boardTiles[i].addEventListener(
-        "click",
-        () => {
-          gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
-          boardTiles[i].textContent = `${gameMaster.getCurrentPlayer()}`;
-          gameMaster.checkWinner();
-          gameMaster.changeCurrentPlayer();
-        },
-        { once: true }
-      );
+      boardTiles[i].addEventListener("click", clickTile, { once: true });
     }
   };
   const getBoardTiles = () => {
