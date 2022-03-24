@@ -78,7 +78,14 @@ const gameMaster = (() => {
         boardState[4] == currentPlayer &&
         boardState[6] == currentPlayer)
     ) {
-      console.log(`${getCurrentPlayer()} wins`);
+      // console.log(`${getCurrentPlayer()} wins`);
+      const winnerAnnouncement = document.querySelector(
+        ".winner-announcement-container"
+      );
+      winnerAnnouncement.textContent = `${getCurrentPlayer()} wins`;
+      for (const tile of displayController.getBoardTiles()) {
+        tile.removeEventListener("click");
+      }
     }
   };
   return { getCurrentPlayer, changeCurrentPlayer, checkWinner };
@@ -102,8 +109,11 @@ const displayController = (() => {
       );
     }
   };
+  const getBoardTiles = () => {
+    return boardTiles;
+  };
 
-  return { tilesEventListener };
+  return { tilesEventListener, getBoardTiles };
 })();
 
 displayController.tilesEventListener();
