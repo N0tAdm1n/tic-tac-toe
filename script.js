@@ -91,20 +91,14 @@ const gameMaster = (() => {
 // control everything on display
 const displayController = (() => {
   const boardTiles = Array.from(document.querySelectorAll(".tile"));
+  const clickTile = (e) => {
+    console.log(boardTiles.indexOf(e.target));
+  };
   // eventListener for each tiles
   const tilesEventListener = () => {
-    for (let i = 0; i < 9; i++) {
-      boardTiles[i].addEventListener(
-        "click",
-        () => {
-          gameBoard.updateBoardState(i, gameMaster.getCurrentPlayer());
-          boardTiles[i].textContent = `${gameMaster.getCurrentPlayer()}`;
-          gameMaster.checkWinner();
-          gameMaster.changeCurrentPlayer();
-        },
-        { once: true }
-      );
-    }
+    boardTiles.forEach((tile) => {
+      tile.addEventListener("click", clickTile, { once: true });
+    });
   };
 
   return { tilesEventListener };
