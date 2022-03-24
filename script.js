@@ -92,7 +92,13 @@ const gameMaster = (() => {
 const displayController = (() => {
   const boardTiles = Array.from(document.querySelectorAll(".tile"));
   const clickTile = (e) => {
-    console.log(boardTiles.indexOf(e.target));
+    gameBoard.updateBoardState(
+      boardTiles.indexOf(e.target),
+      gameMaster.getCurrentPlayer()
+    );
+    e.target.textContent = `${gameMaster.getCurrentPlayer()}`;
+    gameMaster.checkWinner();
+    gameMaster.changeCurrentPlayer();
   };
   // eventListener for each tiles
   const tilesEventListener = () => {
