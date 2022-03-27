@@ -91,8 +91,9 @@ const gameMaster = (() => {
 
 // control everything on display
 const displayController = (() => {
+  const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
-
+  // function for eventListener
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
       _boardTiles.indexOf(e.target),
@@ -113,6 +114,9 @@ const displayController = (() => {
     _boardTiles.forEach((tile) =>
       tile.removeEventListener("click", _clickTile)
     );
+  };
+  const restartButtonEventListener = () => {
+    _restartButton.addEventListener("click", _clickRestart);
   };
   return { tilesEventListener, removeTilesEventListener };
 })();
