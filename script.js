@@ -123,6 +123,12 @@ const displayController = (() => {
   const restartButtonEventListener = () => {
     _restartButton.addEventListener("click", _clickRestart);
   };
+  //reset tiles
+  const resetTiles = () => {
+    _boardTiles.forEach((tile) => {
+      tile.textContent = "";
+    });
+  };
   return { tilesEventListener, removeTilesEventListener };
 })();
 
