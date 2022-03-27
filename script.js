@@ -97,12 +97,16 @@ const gameMaster = (() => {
 const displayController = (() => {
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
+  // function fo restart button event listener
   const _clickRestart = () => {
     gameBoard.resetBoard();
     resetTiles();
+    if (gameMaster.getCurrentPlayer() == "o") {
+      gameMaster.changeCurrentPlayer();
+    }
     tilesEventListener();
   };
-  // function for eventListener
+  // function for tile eventListener
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
       _boardTiles.indexOf(e.target),
