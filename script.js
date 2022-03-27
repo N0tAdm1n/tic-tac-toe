@@ -97,7 +97,11 @@ const gameMaster = (() => {
 const displayController = (() => {
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
-  const _clickRestart = () => {};
+  const _clickRestart = () => {
+    gameBoard.resetBoard();
+    resetTiles();
+    tilesEventListener();
+  };
   // function for eventListener
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
@@ -129,7 +133,12 @@ const displayController = (() => {
       tile.textContent = "";
     });
   };
-  return { tilesEventListener, removeTilesEventListener };
+  return {
+    tilesEventListener,
+    removeTilesEventListener,
+    restartButtonEventListener,
+  };
 })();
 
 displayController.tilesEventListener();
+displayController.restartButtonEventListener();
