@@ -12,7 +12,11 @@ const gameBoard = (() => {
   const updateBoardState = (index, sign) => {
     _board[index] = `${sign}`;
   };
-  return { showBoardState, updateBoardState };
+  // reset board state
+  const resetBoard = () => {
+    _board = ["", "", "", "", "", "", "", "", ""];
+  };
+  return { showBoardState, updateBoardState, resetBoard };
 })();
 
 // 2 player factories
@@ -93,6 +97,7 @@ const gameMaster = (() => {
 const displayController = (() => {
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
+  const _clickRestart = () => {};
   // function for eventListener
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
