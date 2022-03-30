@@ -82,7 +82,6 @@ const gameMaster = (() => {
         boardState[4] == currentPlayer &&
         boardState[6] == currentPlayer)
     ) {
-      // console.log(`${getCurrentPlayer()} wins`);
       const winnerAnnouncement = document.querySelector(
         ".winner-announcement-container"
       );
@@ -90,6 +89,7 @@ const gameMaster = (() => {
       displayController.removeTilesEventListener();
     }
   };
+
   return { getCurrentPlayer, changeCurrentPlayer, checkWinner };
 })();
 
@@ -104,6 +104,10 @@ const displayController = (() => {
     if (gameMaster.getCurrentPlayer() == "o") {
       gameMaster.changeCurrentPlayer();
     }
+    const winnerAnnouncement = document.querySelector(
+      ".winner-announcement-container"
+    );
+    winnerAnnouncement.textContent = ``;
     tilesEventListener();
   };
   // function for tile eventListener
@@ -128,6 +132,7 @@ const displayController = (() => {
       tile.removeEventListener("click", _clickTile)
     );
   };
+  // restart button event listener
   const restartButtonEventListener = () => {
     _restartButton.addEventListener("click", _clickRestart);
   };
