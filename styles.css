@@ -10,6 +10,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+.restart {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+}
 .board {
     width: 400px;
     height: 400px;
