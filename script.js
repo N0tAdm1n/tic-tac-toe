@@ -90,7 +90,19 @@ const gameMaster = (() => {
     }
   };
 
-  return { getCurrentPlayer, changeCurrentPlayer, checkWinner };
+  const checkTie = () => {
+    const boardState = gameBoard.showBoardState();
+    const winnerAnnouncement = document.querySelector(
+      ".winner-announcement-container"
+    );
+    if (
+      winnerAnnouncement.textContent == "" &&
+      boardState.every((element) => element == "x" || element == "o")
+    ) {
+      winnerAnnouncement.textContent = "Tie";
+    }
+  };
+  return { getCurrentPlayer, changeCurrentPlayer, checkWinner, checkTie };
 })();
 
 // control everything on display
@@ -118,6 +130,7 @@ const displayController = (() => {
     );
     e.target.textContent = `${gameMaster.getCurrentPlayer()}`;
     gameMaster.checkWinner();
+    gameMaster.checkTie();
     gameMaster.changeCurrentPlayer();
   };
   // eventListener for each tiles
