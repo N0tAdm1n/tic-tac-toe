@@ -16,10 +16,11 @@ body {
     width: fit-content;
     margin: 0 auto;
 }
-.restart {
+.buttons-container > button {
     width: 80px;
     height: 40px;
     border-radius: 10px;
+    margin: 0 30px;
 }
 .board {
     width: 400px;
