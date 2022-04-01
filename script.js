@@ -42,9 +42,12 @@ const Player = () => {
 const gameMaster = (() => {
   const _player1 = Player();
   const _player2 = Player();
+  const _AI = Player();
   _player1.changePlayerName("Unga");
   _player1.changePlayerSign("x");
   _player2.changePlayerSign("o");
+  _AI.changePlayerName("AI");
+  _AI.changePlayerSign("o");
   let _currentPlayer = _player1;
   const getCurrentPlayer = () => {
     return _currentPlayer;
