@@ -49,6 +49,12 @@ const gameMaster = (() => {
   const getCurrentPlayer = () => {
     return _currentPlayer;
   };
+  const setPlayersName = () => {
+    const _player1Input = document.querySelector("#player1");
+    const _player2Input = document.querySelector("#player2");
+    _player1.changePlayerName(_player1Input.value);
+    _player2.changePlayerName(_player2Input.value);
+  };
   const changeCurrentPlayer = () => {
     if (_currentPlayer == "x") _currentPlayer = "o";
     else _currentPlayer = "x";
@@ -102,13 +108,21 @@ const gameMaster = (() => {
       winnerAnnouncement.textContent = "Tie";
     }
   };
-  return { getCurrentPlayer, changeCurrentPlayer, checkWinner, checkTie };
+  return {
+    setPlayersName,
+    getCurrentPlayer,
+    changeCurrentPlayer,
+    checkWinner,
+    checkTie,
+  };
 })();
 
 // control everything on display
 const displayController = (() => {
+  const _startButton = document.querySelector(".start");
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
+
   // function fo restart button event listener
   const _clickRestart = () => {
     gameBoard.resetBoard();
@@ -144,6 +158,10 @@ const displayController = (() => {
     _boardTiles.forEach((tile) =>
       tile.removeEventListener("click", _clickTile)
     );
+  };
+  // start button event listener
+  const startButtonEventListener = () => {
+    _startButton.addEventListener("click", _clickStart);
   };
   // restart button event listener
   const restartButtonEventListener = () => {
