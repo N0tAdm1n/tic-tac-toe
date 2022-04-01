@@ -108,12 +108,24 @@ const gameMaster = (() => {
       winnerAnnouncement.textContent = "Tie";
     }
   };
+
+  // AI
+  const playAI = () => {
+    let emptyTiles = [];
+    for (let i = 0; i < 9; i++) {
+      if (gameBoard.showBoardState()[i] == "") {
+        emptyTiles.push(i);
+      }
+    }
+    return Math.floor(Math.random() * emptyTiles.length);
+  };
   return {
     setPlayersName,
     getCurrentPlayer,
     changeCurrentPlayer,
     checkWinner,
     checkTie,
+    playAI,
   };
 })();
 
