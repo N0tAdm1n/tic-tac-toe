@@ -125,8 +125,8 @@ const displayController = (() => {
 
   // function for start button event listener
   const _clickStart = () => {
-    displayController.tilesEventListener();
     gameMaster.setPlayersName();
+    tilesEventListener();
   };
 
   // function for restart button event listener
@@ -140,6 +140,7 @@ const displayController = (() => {
       ".winner-announcement-container"
     );
     winnerAnnouncement.textContent = ``;
+    gameMaster.setPlayersName();
     tilesEventListener();
   };
   // function for tile eventListener
@@ -187,5 +188,5 @@ const displayController = (() => {
   };
 })();
 
-displayController.tilesEventListener();
+displayController.startButtonEventListener();
 displayController.restartButtonEventListener();
