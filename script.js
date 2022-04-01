@@ -57,10 +57,11 @@ const gameMaster = (() => {
   };
   const changeCurrentPlayer = () => {
     if (_currentPlayer == _player1) _currentPlayer = _player2;
+    else _currentPlayer = _player1;
   };
   const checkWinner = () => {
     let boardState = gameBoard.showBoardState();
-    let currentPlayer = getCurrentPlayer().getSign();
+    let currentPlayer = _currentPlayer.getSign();
     if (
       (boardState[0] == currentPlayer &&
         boardState[1] == currentPlayer &&
@@ -90,7 +91,7 @@ const gameMaster = (() => {
       const winnerAnnouncement = document.querySelector(
         ".winner-announcement-container"
       );
-      winnerAnnouncement.textContent = `${getCurrentPlayer()} wins`;
+      winnerAnnouncement.textContent = `${getCurrentPlayer().getName()} wins`;
       displayController.removeTilesEventListener();
     }
   };
@@ -126,13 +127,14 @@ const displayController = (() => {
   const _clickStart = () => {
     gameMaster.setPlayersName();
     tilesEventListener();
+    restartButtonEventListener();
   };
 
   // function for restart button event listener
   const _clickRestart = () => {
     gameBoard.resetBoard();
     resetTiles();
-    if (gameMaster.getCurrentPlayer() == "o") {
+    if (gameMaster.getCurrentPlayer().getSign() == "o") {
       gameMaster.changeCurrentPlayer();
     }
     const winnerAnnouncement = document.querySelector(
@@ -146,9 +148,9 @@ const displayController = (() => {
   const _clickTile = (e) => {
     gameBoard.updateBoardState(
       _boardTiles.indexOf(e.target),
-      gameMaster.getCurrentPlayer()
+      gameMaster.getCurrentPlayer().getSign()
     );
-    e.target.textContent = `${gameMaster.getCurrentPlayer()}`;
+    e.target.textContent = `${gameMaster.getCurrentPlayer().getSign()}`;
     gameMaster.checkWinner();
     gameMaster.checkTie();
     gameMaster.changeCurrentPlayer();
@@ -188,4 +190,3 @@ const displayController = (() => {
 })();
 
 displayController.startButtonEventListener();
-displayController.restartButtonEventListener();
