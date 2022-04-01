@@ -123,7 +123,13 @@ const displayController = (() => {
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
 
-  // function fo restart button event listener
+  // function for start button event listener
+  const _clickStart = () => {
+    displayController.tilesEventListener();
+    gameMaster.setPlayersName();
+  };
+
+  // function for restart button event listener
   const _clickRestart = () => {
     gameBoard.resetBoard();
     resetTiles();
@@ -161,7 +167,7 @@ const displayController = (() => {
   };
   // start button event listener
   const startButtonEventListener = () => {
-    _startButton.addEventListener("click", _clickStart);
+    _startButton.addEventListener("click", _clickStart, { once: true });
   };
   // restart button event listener
   const restartButtonEventListener = () => {
@@ -177,6 +183,7 @@ const displayController = (() => {
     tilesEventListener,
     removeTilesEventListener,
     restartButtonEventListener,
+    startButtonEventListener,
   };
 })();
 
