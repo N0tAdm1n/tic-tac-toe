@@ -45,17 +45,16 @@ const gameMaster = (() => {
   _player1.changePlayerName("Unga");
   _player1.changePlayerSign("x");
   _player2.changePlayerSign("o");
-  let _currentPlayer = _player1.getSign();
+  let _currentPlayer = _player1;
   const getCurrentPlayer = () => {
     return _currentPlayer;
   };
   const changeCurrentPlayer = () => {
-    if (_currentPlayer == "x") _currentPlayer = "o";
-    else _currentPlayer = "x";
+    if (_currentPlayer == _player1) _currentPlayer = _player2;
   };
   const checkWinner = () => {
     let boardState = gameBoard.showBoardState();
-    let currentPlayer = gameMaster.getCurrentPlayer();
+    let currentPlayer = getCurrentPlayer().getSign();
     if (
       (boardState[0] == currentPlayer &&
         boardState[1] == currentPlayer &&
