@@ -63,6 +63,12 @@ const gameMaster = (() => {
     if (_currentPlayer == _player1) _currentPlayer = _player2;
     else _currentPlayer = _player1;
   };
+  const changeMode = (newMode) => {
+    _mode = newMode;
+  };
+  const getMode = () => {
+    return _mode;
+  };
   const checkWinner = () => {
     let boardState = gameBoard.showBoardState();
     let currentPlayer = _currentPlayer.getSign();
@@ -130,6 +136,8 @@ const gameMaster = (() => {
     checkWinner,
     checkTie,
     playAI,
+    changeMode,
+    getMode,
   };
 })();
 
@@ -144,7 +152,7 @@ const displayController = (() => {
   const _selectMode = () => {
     for (let option of _modeOption) {
       if (option.checked) {
-        mode = option.value;
+        gameMaster.changeMode(option.value);
         break;
       }
     }
