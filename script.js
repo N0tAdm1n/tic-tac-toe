@@ -132,7 +132,7 @@ const gameMaster = (() => {
         emptyTiles.push(i);
       }
     }
-    return Math.floor(Math.random() * emptyTiles.length);
+    return emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
   };
   return {
     setPlayersName,
