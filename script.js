@@ -60,8 +60,13 @@ const gameMaster = (() => {
     _player2.changePlayerName(_player2Input.value);
   };
   const changeCurrentPlayer = () => {
-    if (_currentPlayer == _player1) _currentPlayer = _player2;
-    else _currentPlayer = _player1;
+    if (_mode == "vsPlayer") {
+      if (_currentPlayer == _player1) _currentPlayer = _player2;
+      else _currentPlayer = _player1;
+    } else {
+      if (_currentPlayer == _player1) _currentPlayer = _AI;
+      else _currentPlayer = _player1;
+    }
   };
   const changeMode = (newMode) => {
     _mode = newMode;
@@ -190,6 +195,12 @@ const displayController = (() => {
     gameMaster.checkWinner();
     gameMaster.checkTie();
     gameMaster.changeCurrentPlayer();
+    if (gameMaster.getMode() == "vsAI") {
+      gameBoard.updateBoardState(
+        gameMaster.playAI(),
+        gameMaster.getCurrentPlayer().getSign()
+      );
+    }
   };
   // eventListener for each tiles
   const tilesEventListener = () => {
