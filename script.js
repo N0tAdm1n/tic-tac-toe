@@ -43,6 +43,7 @@ const gameMaster = (() => {
   const _player1 = Player();
   const _player2 = Player();
   const _AI = Player();
+  let _mode = "vsPlayer";
   _player1.changePlayerName("Unga");
   _player1.changePlayerSign("x");
   _player2.changePlayerSign("o");
@@ -137,10 +138,22 @@ const displayController = (() => {
   const _startButton = document.querySelector(".start");
   const _restartButton = document.querySelector(".restart");
   const _boardTiles = Array.from(document.querySelectorAll(".tile"));
+  const _modeOption = document.querySelectorAll("input[name='mode']");
+
+  // function to select mode
+  const _selectMode = () => {
+    for (let option of _modeOption) {
+      if (option.checked) {
+        mode = option.value;
+        break;
+      }
+    }
+  };
 
   // function for start button event listener
   const _clickStart = () => {
     gameMaster.setPlayersName();
+    _selectMode();
     tilesEventListener();
     restartButtonEventListener();
   };
