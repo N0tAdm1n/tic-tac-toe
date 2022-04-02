@@ -196,10 +196,14 @@ const displayController = (() => {
     gameMaster.checkTie();
     gameMaster.changeCurrentPlayer();
     if (gameMaster.getMode() == "vsAI") {
+      let AIMove = gameMaster.playAI();
       gameBoard.updateBoardState(
-        gameMaster.playAI(),
+        AIMove,
         gameMaster.getCurrentPlayer().getSign()
       );
+      _boardTiles[AIMove].textContent = gameMaster.getCurrentPlayer().getSign();
+      _boardTiles[AIMove].removeEventListener("click", _clickTile);
+      gameMaster.changeCurrentPlayer();
     }
   };
   // eventListener for each tiles
