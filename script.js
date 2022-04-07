@@ -70,8 +70,10 @@ const gameMaster = (() => {
     }
   };
   const isGameFinished = () => _gameFinished;
+
   const changeMode = (newMode) => {
     _mode = newMode;
+    _gameFinished = false;
   };
   const getMode = () => {
     return _mode;
@@ -187,6 +189,7 @@ const displayController = (() => {
     );
     winnerAnnouncement.textContent = ``;
     gameMaster.setPlayersName();
+    _selectMode();
     tilesEventListener();
   };
   // function for tile eventListener
@@ -199,7 +202,10 @@ const displayController = (() => {
     gameMaster.checkWinner();
     gameMaster.checkTie();
     gameMaster.changeCurrentPlayer();
-    if (gameMaster.getMode() == "vsAI") {
+    if (
+      gameMaster.getMode() == "vsAI" &&
+      gameMaster.isGameFinished() == false
+    ) {
       let AIMove = gameMaster.playAI();
       gameBoard.updateBoardState(
         AIMove,
