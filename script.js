@@ -43,6 +43,7 @@ const gameMaster = (() => {
   const _player1 = Player();
   const _player2 = Player();
   const _AI = Player();
+  let _gameFinished = false;
   let _mode = "vsPlayer";
   _player1.changePlayerName("Unga");
   _player1.changePlayerSign("x");
@@ -68,6 +69,7 @@ const gameMaster = (() => {
       else _currentPlayer = _player1;
     }
   };
+  const isGameFinished = () => _gameFinished;
   const changeMode = (newMode) => {
     _mode = newMode;
   };
@@ -107,6 +109,7 @@ const gameMaster = (() => {
         ".winner-announcement-container"
       );
       winnerAnnouncement.textContent = `${getCurrentPlayer().getName()} wins`;
+      _gameFinished = true;
       displayController.removeTilesEventListener();
     }
   };
@@ -143,6 +146,7 @@ const gameMaster = (() => {
     playAI,
     changeMode,
     getMode,
+    isGameFinished,
   };
 })();
 
