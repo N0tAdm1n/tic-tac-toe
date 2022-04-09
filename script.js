@@ -213,6 +213,8 @@ const displayController = (() => {
       );
       _boardTiles[AIMove].textContent = gameMaster.getCurrentPlayer().getSign();
       _boardTiles[AIMove].removeEventListener("click", _clickTile);
+      gameMaster.checkWinner();
+      gameMaster.checkTie();
       gameMaster.changeCurrentPlayer();
     }
   };
